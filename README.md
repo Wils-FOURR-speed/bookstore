@@ -6,7 +6,7 @@
   # Nji Wilsan N.
   <br/>
 
-  <h3><b>Math Magicians Project</b></h3>
+  <h3><b>Bookstore Project</b></h3>
 
 </div>
 
@@ -17,7 +17,6 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -30,9 +29,9 @@
 - [📝 License](#license)
 
 
-# 📖 MATH-MAGICIANS
+# 📖 BookStore
 
-This is my first Micronaut React project. Some complex coding is required for this exercise. The goal is to master all of the tools and best practices. 
+This is a Bookstore project where you get to have a list of books you like. You will even get to Add/Delete books from the list. And more to that, you can even see the state of your book. That is "How far you've gone in reading a particular book".
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -87,7 +86,7 @@ In order to run this project you need:
 
 Clone this repository to your desired folder:
 
-git clone https://github.com/Wils-FOURR-speed/math-magician.git
+git clone https://github.com/Wils-FOURR-speed/bookstore.git
 
 
 ### Run tests
@@ -136,7 +135,7 @@ To run tests, run the following command:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/Wils-FOURR-speed/math-magician/issues).
+Feel free to check the [issues page](https://github.com/Wils-FOURR-speed/bookstore/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
