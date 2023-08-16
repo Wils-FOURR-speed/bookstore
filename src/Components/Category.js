@@ -1,9 +1,9 @@
 import React from 'react';
 
-function BooksList() {
+function BooksCategory() {
   return (
     <div />
   );
 }
 
-export default BooksList;
+export default BooksCategory;

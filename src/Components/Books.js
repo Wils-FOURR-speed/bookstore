@@ -1,0 +1,31 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+function Books({ title, author }) {
+  return (
+    <div className="main">
+      <div>
+        <h1>{title}</h1>
+        <p>
+          By
+          {author}
+        </p>
+      </div>
+
+      <div className="BookBtns">
+        <button type="button">Edit</button>
+        <span>|</span>
+        <button type="button">Remove</button>
+        <span>|</span>
+        <button type="button">Comment</button>
+      </div>
+    </div>
+  );
+}
+
+Books.propTypes = {
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+};
+
+export default Books;
