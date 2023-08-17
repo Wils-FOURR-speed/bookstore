@@ -10,7 +10,7 @@ function Navbar() {
         </Link>
 
         <Link to="/categories">
-          <h2>Book-List</h2>
+          <h2>Categories</h2>
         </Link>
       </div>
     </nav>

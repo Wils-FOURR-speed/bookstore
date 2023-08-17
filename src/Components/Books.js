@@ -5,9 +5,9 @@ function Books({ title, author }) {
   return (
     <div className="main">
       <div>
-        <h1>{title}</h1>
+        <h3>Title:{title}</h3>
         <p>
-          By
+          By:
           {author}
         </p>
       </div>
