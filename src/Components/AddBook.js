@@ -3,7 +3,7 @@ import React from 'react';
 function AddBook() {
   return (
     <div>
-      <p>Add a New book</p>
+      <p>ADD A NEW BOOK</p>
       <form>
         <input type="text" placeholder="Book's Title" />
         <input type="text" placeholder="Book's Author" />
