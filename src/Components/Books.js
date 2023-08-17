@@ -5,11 +5,14 @@ function Books({ title, author }) {
   return (
     <div className="main">
       <div>
-        <h3>Title:{title}</h3>
-        <p>
+        <h3>
+          Title:
+          {title}
+        </h3>
+        <h3>
           By:
           {author}
-        </p>
+        </h3>
       </div>
 
       <div className="BookBtns">
