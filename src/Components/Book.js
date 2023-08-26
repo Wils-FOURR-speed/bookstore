@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Books from './Books';
-import AddBook from './AddBook';
-import { removeBook } from '../redux/books/booksSlice';
+import { removeBookAsync, fetchBooks } from '../redux/books/booksSlice';
 
 const BooksPage = () => {
   const dispatch = useDispatch();
-  const books = useSelector((state) => state.books);
+  const books = useSelector((state) => state.books.books);
 
-  const handleRemoveBook = (itemId) => {
-    dispatch(removeBook(itemId));
+  const status = useSelector((state) => state.books.status);
+
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, [dispatch]);
+
+  const handleRemoveBook = async (itemId) => {
+    await dispatch(removeBookAsync(itemId));
   };
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+  if (!Array.isArray(books)) {
+    return <p>No books available.</p>;
+  }
 
   return (
     <div>
@@ -24,7 +36,6 @@ const BooksPage = () => {
           <button type="button" onClick={() => handleRemoveBook(book.item_id)}>Remove</button>
         </div>
       ))}
-      <AddBook />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addBook } from '../redux/books/booksSlice';
+import { addBookAsync } from '../redux/books/booksSlice';
 
 function AddBook() {
   const dispatch = useDispatch();
@@ -18,14 +18,14 @@ function AddBook() {
     }));
   };
 
-  const handleBookAdding = () => {
+  const handleBookAdding = async () => {
     if (newBook.title && newBook.author && newBook.category) {
       const thatMoment = new Date().getTime();
       const bookToBeAdded = {
         item_id: thatMoment.toString(),
         ...newBook,
       };
-      dispatch(addBook(bookToBeAdded));
+      await dispatch(addBookAsync(bookToBeAdded));
       setNewBook({
         title: '',
         author: '',
