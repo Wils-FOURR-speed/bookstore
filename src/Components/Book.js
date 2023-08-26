@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../styles/Book.css';
+import '../Styles/Book.css';
 
 const Book = ({
   title, author, category, onDelete,

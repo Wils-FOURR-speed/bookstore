@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import '../styles/Navbar.css';
+import '../Styles/Navigation.css';
 
 const Navbar = () => (
   <nav className="nav-bar">
