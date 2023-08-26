@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import BooksCategory from './Components/Category';
 import Navbar from './Components/Navigation';
-import BooksPage from './Components/Book';
+import BookContainer from './Components/Homepage';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<BooksPage />} />
+        <Route path="/" element={<BookContainer />} />
         <Route path="/author" element={<BooksCategory />} />
       </Routes>
     </BrowserRouter>
