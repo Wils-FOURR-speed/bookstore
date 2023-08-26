@@ -9,10 +9,10 @@ const Navbar = () => (
     <a className="nav-brand" href="#/">Bookstore CMS</a>
     <ul className="nav-links">
       <li>
-        <NavLink className="nav-link active-link" to="/">Home</NavLink>
+        <NavLink className="nav-link active-link" to="/">HOME</NavLink>
       </li>
       <li>
-        <NavLink className="nav-link" to="/categories">Categories</NavLink>
+        <NavLink className="nav-link" to="/categories">CATEGORIES</NavLink>
       </li>
     </ul>
     <button className="icon-button" type="button">

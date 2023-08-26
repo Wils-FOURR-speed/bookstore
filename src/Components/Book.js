@@ -8,9 +8,9 @@ const Book = ({
   <div className="book">
     <div className="book-content">
       <div className="book-info">
-        <h4 className="book-category">{category}</h4>
-        <h2 className="book-title">{title}</h2>
-        <h6 className="book-author">{author}</h6>
+        <span className="book-category">{category}</span>
+        <span className="book-title">{title}</span>
+        <span className="book-author">{author}</span>
         <div className="action-buttons">
           <button className="button-outline" type="button">Comments</button>
           <div className="vertical-divider" />
