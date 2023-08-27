@@ -36,7 +36,7 @@ function AddBook() {
 
   return (
     <div>
-      <p>ADD A NEW BOOK</p>
+      <p>Add a New book</p>
       <form>
         <input type="text" placeholder="Book's Title" value={newBook.title} onChange={handleEditInput} />
         <input type="text" placeholder="Book's Author" value={newBook.author} onChange={handleEditInput} />
