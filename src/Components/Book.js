@@ -1,51 +1,43 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import '../Styles/Book.css';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Books from './Books';
+import { removeBookAsync, fetchBooks } from '../redux/books/booksSlice';
 
-const Book = ({
-  title, author, category, onDelete,
-}) => (
-  <div className="book">
-    <div className="book-content">
-      <div className="book-info">
-        <span className="book-category">{category}</span>
-        <span className="book-title">{title}</span>
-        <span className="book-author">{author}</span>
-        <div className="action-buttons">
-          <button className="button-outline" type="button">Comments</button>
-          <div className="vertical-divider" />
-          <button className="button-outline" type="button" onClick={onDelete}>
-            Delete
-          </button>
-          <div className="vertical-divider" />
-          <button className="button-outline" type="button">Edit</button>
+const BooksPage = () => {
+  const dispatch = useDispatch();
+  const books = useSelector((state) => state.books.books);
+
+  const status = useSelector((state) => state.books.status);
+
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, [dispatch]);
+
+  const handleRemoveBook = async (itemId) => {
+    await dispatch(removeBookAsync(itemId));
+  };
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+  if (!Array.isArray(books)) {
+    return <p>No books available.</p>;
+  }
+
+  return (
+    <div>
+      {books.map((book) => (
+        <div key={book.item_id}>
+          <Books
+            title={book.title}
+            author={book.author}
+            category={book.category}
+          />
+          <button type="button" onClick={() => handleRemoveBook(book.item_id)}>Remove</button>
         </div>
-      </div>
-      <div className="progress-container">
-        <div className="circular-progress-container"><div className="circular-progress" /></div>
-        <div className="progress-stat">
-          <p className="percent-complete">64%</p>
-          <p className="completed">Completed</p>
-        </div>
-        <div className="progress-divider" />
-        <div className="current-chapter-container">
-          <div>
-            <p className="current-chapter-label">CURRENT CHAPTER</p>
-            <p className="current-chapter">Chapter 17</p>
-          </div>
-          <div><button className="primary-button" type="button">UPDATE PROGRESS</button></div>
-        </div>
-      </div>
+      ))}
     </div>
-  </div>
-
-);
-
-Book.propTypes = {
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  );
 };
 
-export default Book;
+export default BooksPage;

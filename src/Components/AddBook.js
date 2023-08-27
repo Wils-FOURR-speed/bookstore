@@ -1,58 +1,50 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addBook, fetchBooks } from '../redux/books/booksSlice';
-import '../Styles/AddBook.css';
+import { addBookAsync } from '../redux/books/booksSlice';
 
-const BookForm = () => {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [category, setCategory] = useState('');
+function AddBook() {
   const dispatch = useDispatch();
+  const [newBook, setNewBook] = useState({
+    title: '',
+    author: '',
+    category: '',
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (title && author && category) {
-      const newBook = {
-        title,
-        author,
-        category,
+  const handleEditInput = (event) => {
+    const { name, value } = event.target;
+    setNewBook((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleBookAdding = async () => {
+    if (newBook.title && newBook.author && newBook.category) {
+      const thatMoment = new Date().getTime();
+      const bookToBeAdded = {
+        item_id: thatMoment.toString(),
+        ...newBook,
       };
-      dispatch(addBook(newBook)).then(() => {
-        dispatch(fetchBooks());
+      await dispatch(addBookAsync(bookToBeAdded));
+      setNewBook({
+        title: '',
+        author: '',
+        category: '',
       });
-      setTitle('');
-      setAuthor('');
-      setCategory('');
     }
   };
 
   return (
-    <div className="form">
-      <h2 className="form-title">Add New Book</h2>
-      <form className="add-form" onSubmit={handleSubmit}>
-        <input
-          className="title-input"
-          type="text"
-          value={title}
-          placeholder="Title"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          value={author}
-          placeholder="Author"
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-        <input
-          type="text"
-          value={category}
-          placeholder="Category"
-          onChange={(e) => setCategory(e.target.value)}
-        />
-        <button className="primary-button-big" type="submit">Add Book</button>
+    <div>
+      <p>Add a New book</p>
+      <form>
+        <input type="text" placeholder="Book's Title" value={newBook.title} onChange={handleEditInput} />
+        <input type="text" placeholder="Book's Author" value={newBook.author} onChange={handleEditInput} />
+        <input type="text" placeholder="Book's Category" value={newBook.category} onChange={handleEditInput} />
+        <button type="button" onClick={handleBookAdding}>Add Book</button>
       </form>
     </div>
   );
-};
+}
 
-export default BookForm;
+export default AddBook;

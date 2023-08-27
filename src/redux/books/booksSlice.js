@@ -2,56 +2,26 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-function generateRandomId(length) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let id = '';
-
-  for (let i = 0; i < length; i += 1) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    id += characters.charAt(randomIndex);
-  }
-
-  return id;
-}
-
-const baseURL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/GyLXdEA2xBmwAoU8RmQR/books';
-
-const initialState = {
-  book: [],
-  isLoading: false,
-};
+const apiEndpoint = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/GyLXdEA2xBmwAoU8RmQR/books';
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
-  try {
-    const response = await axios.get(baseURL);
-    return response.data;
-  } catch (error) {
-    throw new Error('Failed to fetch books');
-  }
+  const response = await axios.get(apiEndpoint);
+  return response.data;
 });
 
-export const addBook = createAsyncThunk('books/addBook', async (newBookData) => {
-  try {
-    const newBook = {
-      item_id: generateRandomId(10),
-      ...newBookData,
-    };
-
-    await axios.post(baseURL, newBook);
-  } catch (error) {
-    console.error('Error posting book:', error);
-    throw error;
-  }
+export const addBookAsync = createAsyncThunk('books/addBookAsync', async (book) => {
+  const response = await axios.post(apiEndpoint, book);
+  return response.data;
 });
 
-export const removeBook = createAsyncThunk('books/removeBook', async (item_id) => {
-  try {
-    await axios.delete(`${baseURL}/${item_id}`);
-  } catch (error) {
-    console.error('Error removing book:', error);
-    throw error;
-  }
+export const removeBookAsync = createAsyncThunk('books/removeBookAsync', async (itemId) => {
+  await axios.delete(`${apiEndpoint}/${itemId}`);
+  return itemId;
 });
+const initialState = {
+  books: [],
+  isLoading: false,
+};
 
 const booksSlice = createSlice({
   name: 'books',
@@ -74,7 +44,7 @@ const booksSlice = createSlice({
         return {
           ...state,
           isLoading: false,
-          book: booksArray,
+          books: booksArray,
         };
       })
 
@@ -82,31 +52,32 @@ const booksSlice = createSlice({
         ...state,
         isLoading: false,
       }))
-      .addCase(addBook.pending, (state) => ({
+      .addCase(addBookAsync.pending, (state) => ({
         ...state,
         isLoading: true,
       }))
-      .addCase(addBook.fulfilled, (state) => ({
+      .addCase(addBookAsync.fulfilled, (state, action) => ({
+        ...state,
+        isLoading: false,
+        books: [...state.books, action.payload],
+      }))
+      .addCase(addBookAsync.rejected, (state) => ({
         ...state,
         isLoading: false,
       }))
-      .addCase(addBook.rejected, (state) => ({
-        ...state,
-        isLoading: false,
-      }))
-      .addCase(removeBook.pending, (state) => ({
+      .addCase(removeBookAsync.pending, (state) => ({
         ...state,
         isLoading: true,
       }))
-      .addCase(removeBook.fulfilled, (state, action) => {
+      .addCase(removeBookAsync.fulfilled, (state, action) => {
         const itemIdToRemove = action.payload;
         return {
           ...state,
           isLoading: false,
-          book: state.book.filter((book) => book.item_id !== itemIdToRemove),
+          books: state.books.filter((book) => book.item_id !== itemIdToRemove),
         };
       })
-      .addCase(removeBook.rejected, (state) => ({
+      .addCase(removeBookAsync.rejected, (state) => ({
         ...state,
         isLoading: false,
       }));

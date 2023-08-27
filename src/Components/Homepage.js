@@ -1,7 +1,6 @@
 import React from 'react';
 import BookList from './Books';
 import BookForm from './AddBook';
-import '../Styles/AddBook.css';
 
 const BookContainer = () => (
   <div className="home">

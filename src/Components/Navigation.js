@@ -1,24 +1,20 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import '../Styles/Navigation.css';
+import { Link } from 'react-router-dom';
 
-const Navbar = () => (
-  <nav className="nav-bar">
-    <a className="nav-brand" href="#/">Bookstore CMS</a>
-    <ul className="nav-links">
-      <li>
-        <NavLink className="nav-link active-link" to="/">HOME</NavLink>
-      </li>
-      <li>
-        <NavLink className="nav-link" to="/categories">CATEGORIES</NavLink>
-      </li>
-    </ul>
-    <button className="icon-button" type="button">
-      <FontAwesomeIcon icon={faUser} />
-    </button>
-  </nav>
-);
+function Navbar() {
+  return (
+    <nav>
+      <div className="right">
+        <Link to="/">
+          <h2>Book-State</h2>
+        </Link>
+
+        <Link to="/categories">
+          <h2>Categories</h2>
+        </Link>
+      </div>
+    </nav>
+  );
+}
 
 export default Navbar;
